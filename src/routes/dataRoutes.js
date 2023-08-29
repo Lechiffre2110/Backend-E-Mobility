@@ -14,12 +14,12 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage: storage });
 
-router.post("/upload", upload.single("file"), dataController.uploadData);
+router.post("/", upload.single("file"), dataController.uploadData);
 
-router.get("/data", dataController.getDataInformation);
+router.get("/", dataController.getDataInformation);
 
 router.get("/download/:id", dataController.downloadFile);
 
-router.get("/downloadAll", dataController.downloadAllFiles);
+router.get("/download", dataController.downloadAllFiles);
 
 module.exports = router;

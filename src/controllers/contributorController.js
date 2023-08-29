@@ -35,7 +35,7 @@ exports.getContributors = async (req, res) => {
 
 exports.approveContributor = async (req, res) => {
     try {
-        const contributor = await Contributor.findById(req.body.id);
+        const contributor = await Contributor.findById(req.params.id);
         if (!contributor) {
             return res.status(404).json({
                 message: "Contributor not found",
@@ -59,14 +59,14 @@ exports.approveContributor = async (req, res) => {
 
 exports.declineContributor = async (req, res) => {
     try {
-        const contributor = await Contributor.findById(req.body.id);
+        const contributor = await Contributor.findById(req.params.id);
         if (!contributor) {
             return res.status(404).json({
                 message: "Contributor not found",
             });
         }
 
-        await contributor.deleteOne( { _id: req.body.id })
+        await contributor.deleteOne( { _id: req.params.id })
 
         res.status(200).json({
             message: "Contributor declined successfully!",

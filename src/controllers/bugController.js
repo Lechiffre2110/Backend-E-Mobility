@@ -33,7 +33,7 @@ exports.getBugs = async (req, res) => {
 
 exports.resolveBug = async (req, res) => {
     try {
-        const bug = await Bug.findById(req.body.id);
+        const bug = await Bug.findById(req.params.id);
         if (!bug) {
             return res.status(404).json({
                 message: "Bug not found",

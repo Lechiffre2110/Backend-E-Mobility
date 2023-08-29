@@ -11,44 +11,34 @@ const errorHandler = require("./middlewares/errorHandler");
 
 
 const app = express();
-const port = 5555;
+const PORT = process.env.PORT || 5555;
+const MONGO_URI = process.env.MONGO_URI;
 
 app.use(cors());
-
-//Set up logging
 app.use(morgan("combined"));
-
 app.use(express.json());
-
 app.use("/uploads", express.static("uploads"));
 
-app.use('/hub', dataRoutes);
+const apiRouter = express.Router();
+app.use('/api', apiRouter);
 
-app.use('/api', contributorRoutes);
-
-app.use('/api', onboardingRoutes);
-
-app.use('/bug', bugRoutes);
-
-//TODO: change routes to make more sense
+apiRouter.use('/data', dataRoutes);
+apiRouter.use('/contributors', contributorRoutes);
+apiRouter.use('/onboarding', onboardingRoutes);
+apiRouter.use('/bugs', bugRoutes);
 
 app.use(errorHandler);
 
 
-const mongoUrI = process.env.MONGO_URI;
-
 //Establish connection to MongoDB
 mongoose
-  .connect(mongoUrI, {
+  .connect(MONGO_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
   .then(() => console.log("Connected to MongoDB"))
   .catch((err) => console.error("Could not connect to MongoDB", err));
 
-
-app.use(errorHandler);
-
-app.listen(port, () => {
-  console.log(`E-Mobility backend listening on port ${port}`);
+app.listen(PORT, () => {
+  console.log(`E-Mobility backend listening on port ${PORT}`);
 });

@@ -1,13 +1,7 @@
 const Onboarding = require('../models/OnboardingModel');
 
 exports.acceptOnboarding = async (req, res) => {
-    if (req.body.id === undefined || req.body.id === "") {
-        return res.status(400).json({ error: "Bad Request: " + JSON.stringify(req.body) });
-    }
-
-    const id = req.body.id;
-
-    const user = await Onboarding.findById(id);
+    const user = await Onboarding.findById(req.params.id);
 
     if (!user) {
         return res.status(404).json({ error: "User not found" });

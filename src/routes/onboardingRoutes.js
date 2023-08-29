@@ -4,9 +4,9 @@ const multer = require("multer");
 const upload = multer();
 const onboardingController = require("../controllers/onboardingController");
 
-router.post("/accept", upload.none(), onboardingController.acceptOnboarding);
+router.put("/:id/accept", upload.none(), onboardingController.acceptOnboarding);
 //router.post("/decline", upload.none(), onboardingController.declineOnboarding);
-router.post("/onboard", upload.none(), onboardingController.requestOnboarding);
-router.get("/onboarding-requests", onboardingController.getOnboardingRequests);
+router.post("/", upload.none(), onboardingController.requestOnboarding);
+router.get("/", onboardingController.getOnboardingRequests);
 
 module.exports = router;
