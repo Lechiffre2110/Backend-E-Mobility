@@ -1,6 +1,7 @@
 const Data = require("../models/DataModel");
 const fs = require("fs").promises;
-const path = require("path");
+const archiver = require('archiver');
+const { sendUploadWebhook } = require("../utils/discord");
 
 /**
  * Function to upload data to the server
@@ -36,6 +37,7 @@ exports.uploadData = async (req, res) => {
   });
 
   await data.save();
+  sendUploadWebhook(data.uploader, data.filename, data.description);
 
   res.status(200).json({
     message: "Data uploaded successfully!",
@@ -80,30 +82,35 @@ exports.downloadFile = async (req, res) => {
 };
 
 exports.downloadAllFiles = async (req, res) => {
-  const data = await Data.find();
+  const allData = await Data.find();
 
-  if (!data) {
-    return res.status(404).json({ error: "Files not found" });
+  if (!allData || allData.length === 0) {
+      return res.status(404).json({ error: "Files not found" });
   }
 
-  const zip = new require("node-zip")();
-  const zipName = "data.zip";
-
-  data.forEach((file) => {
-    const data = fs.readFileSync(file.path);
-    zip.file(file.filename, data);
+  // Create a new archive
+  const archive = archiver('zip', {
+      zlib: { level: 9 }
   });
 
-  const dataToSend = zip.generate({ base64: false, compression: "DEFLATE" });
-
-  fs.writeFileSync(zipName, dataToSend, "binary");
-
-  res.download(zipName);
-
-  res.status(200).json({
-    message: "Files downloaded successfully!",
-    data: data,
+  // Register an error handler
+  archive.on('error', (err) => {
+      res.status(500).send({ error: err.message });
   });
 
-  fs.unlinkSync(zipName);
+  // Set headers
+  res.setHeader('Content-Disposition', 'attachment; filename=allFiles.zip');
+  res.setHeader('Content-Type', 'application/zip');
+
+  // Pipe the archive to the response
+  archive.pipe(res);
+
+  // Append files to the archive
+  for (const data of allData) {
+      const fileBuffer = Buffer.from(data.file.buffer);
+      archive.append(fileBuffer, { name: data.filename });
+  }
+
+  // Finalize the archive
+  archive.finalize();
 };

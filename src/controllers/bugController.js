@@ -1,4 +1,5 @@
 const Bug = require("../models/BugModel");
+const { sendBugReportWebhook } = require("../utils/discord");
 
 exports.addBug = async (req, res) => {
   if (!req.body.description || !req.body.title || !req.body.model) {
@@ -15,6 +16,7 @@ exports.addBug = async (req, res) => {
   });
 
   await bug.save();
+  sendBugReportWebhook(bug.title, bug.description, bug.contact)
 
   res.status(200).json({
     message: "Bug reported successfully!",

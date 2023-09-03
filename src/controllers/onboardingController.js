@@ -1,4 +1,6 @@
 const Onboarding = require('../models/OnboardingModel');
+const Email = require('../utils/email');
+const { sendOnboardingRequestWebhook } = require('../utils/discord');
 
 exports.acceptOnboarding = async (req, res) => {
     const user = await Onboarding.findById(req.params.id);
@@ -11,7 +13,8 @@ exports.acceptOnboarding = async (req, res) => {
 
     await user.save();
 
-    //send onboarding email to user
+    Email.sendOnboardingEmail(user.email, user.name);
+    
 
     return res.status(200).json({ message: "Onboarding email sent" });
 
@@ -43,6 +46,7 @@ exports.requestOnboarding = async (req, res) => {
     });
 
     await user.save();
+    sendOnboardingRequestWebhook(user.name);
 
     return res.status(200).json({ message: "Onboarding request sent" });
 }
