@@ -6,7 +6,7 @@ exports.acceptOnboarding = async (req, res) => {
     const user = await Onboarding.findById(req.params.id);
 
     if (!user) {
-        return res.status(404).json({ error: "User not found" });
+        return res.status(404).json({ error: "Not found" });
     }
 
     user.onboarded = true;
@@ -16,7 +16,7 @@ exports.acceptOnboarding = async (req, res) => {
     Email.sendOnboardingEmail(user.email, user.name);
     
 
-    return res.status(200).json({ message: "Onboarding email sent" });
+    return res.status(200).json({ message: "OK" });
 
 }
 
@@ -27,7 +27,7 @@ exports.getOnboardingRequests = async (req, res) => {
     users = users.filter(user => user.onboarded === false);
 
     res.status(200).json({
-        message: "Users fetched successfully!",
+        message: "OK",
         data: users,
     });
 }
@@ -48,6 +48,6 @@ exports.requestOnboarding = async (req, res) => {
     await user.save();
     sendOnboardingRequestWebhook(user.name);
 
-    return res.status(200).json({ message: "Onboarding request sent" });
+    return res.status(200).json({ message: "OK" });
 }
 

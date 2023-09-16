@@ -41,7 +41,7 @@ exports.approveContributor = async (req, res) => {
     const contributor = await Contributor.findById(req.params.id);
     if (!contributor) {
       return res.status(404).json({
-        message: "Contributor not found",
+        message: "OK",
       });
     }
 
@@ -49,12 +49,12 @@ exports.approveContributor = async (req, res) => {
     await contributor.save();
 
     res.status(200).json({
-      message: "Contributor approved successfully!",
+      message: "OK",
       data: contributor,
     });
   } catch (error) {
     res.status(500).json({
-      message: "An error occurred",
+      message: "Internal Server Error",
       error: error.message,
     });
   }
@@ -65,20 +65,20 @@ exports.declineContributor = async (req, res) => {
     const contributor = await Contributor.findById(req.params.id);
     if (!contributor) {
       return res.status(404).json({
-        message: "Contributor not found",
+        message: "Not Found",
       });
     }
 
     await contributor.deleteOne({ _id: req.params.id });
 
     res.status(200).json({
-      message: "Contributor declined successfully!",
+      message: "OK",
       data: contributor,
     });
   } catch (error) {
     console.error(error);
     res.status(500).json({
-      message: "An error occurred",
+      message: "Internal Server Error",
       error: error.message,
     });
   }

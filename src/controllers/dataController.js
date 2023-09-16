@@ -40,7 +40,7 @@ exports.uploadData = async (req, res) => {
   sendUploadWebhook(data.uploader, data.filename, data.description);
 
   res.status(200).json({
-    message: "Data uploaded successfully!",
+    message: "OK",
     data: data,
   });
 };
@@ -49,7 +49,7 @@ exports.getDataInformation = async (req, res) => {
   const dataInfo = await Data.find();
 
   res.status(200).json({
-    message: "Data fetched successfully!",
+    message: "OK",
     data: dataInfo,
   });
 };
@@ -75,8 +75,7 @@ exports.downloadFile = async (req, res) => {
     // Send the buffer as a file
     res.end(fileBuffer);
 } else {
-    console.log("Document not found");
-    return res.status(404).json({ error: "File not found" });
+    return res.status(404).json({ error: "Not found" });
 }
 
 };
@@ -85,7 +84,7 @@ exports.downloadAllFiles = async (req, res) => {
   const allData = await Data.find();
 
   if (!allData || allData.length === 0) {
-      return res.status(404).json({ error: "Files not found" });
+      return res.status(404).json({ error: "Not found" });
   }
 
   // Create a new archive
