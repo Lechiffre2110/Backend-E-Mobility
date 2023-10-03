@@ -51,3 +51,44 @@ exports.requestOnboarding = async (req, res) => {
     return res.status(200).json({ message: "OK" });
 }
 
+exports.bulkOnboard = async (req, res) => {
+    if (req.body.emails === undefined || req.body.emails === "") {
+        return res.status(400).json({ error: "Bad Request: " + JSON.stringify(req.body) });
+    }
+
+    const emails = req.body.emails;
+
+    for (let i = 0; i < emails.length; i++) {
+        const user = new Onboarding({
+            email: emails[i],
+            name: emails[i].split("@")[0],
+            onboarded: true,
+        });
+
+        await user.save();
+        Email.sendOnboardingEmail(user.email, user.name);
+    }
+
+    return res.status(200).json({ message: "OK" });
+}
+
+exports.manualOnboard = async (req, res) => {
+    if (req.body.email === undefined || req.body.email === "" || req.body.name === undefined || req.body.name === "") {
+        return res.status(400).json({ error: "Bad Request: " + JSON.stringify(req.body) });
+    }
+
+    const email = req.body.email;
+    const name = req.body.name;
+
+    const user = new Onboarding({
+        email: email,
+        name: name,
+        onboarded: true,
+    });
+
+    await user.save();
+    Email.sendOnboardingEmail(user.email, user.name);
+
+    return res.status(200).json({ message: "OK" });
+}
+
