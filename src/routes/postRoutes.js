@@ -6,5 +6,6 @@ const postController = require("../controllers/postController");
 
 router.post("/", upload.none(), postController.addPost);
 router.get("/", postController.getAllPosts);
-router.get("/:id", postController.getOnePost);
-router.put("/", upload.none(), postController.updateAllPost);
+router.put("/post", upload.none(), postController.updatePosts);
+
+module.exports = router;

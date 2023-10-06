@@ -9,6 +9,7 @@ const bugRoutes = require("./routes/bugRoutes");
 const onboardingRoutes = require("./routes/onboardingRoutes");
 const errorHandler = require("./middlewares/errorHandler");
 const postRoutes = require("./routes/postRoutes");
+const commentRoutes = require("./routes/commentRoutes");
 
 const app = express();
 const PORT = process.env.PORT || 5555;
@@ -27,6 +28,7 @@ apiRouter.use("/contributors", contributorRoutes);
 apiRouter.use("/onboarding", onboardingRoutes);
 apiRouter.use("/bugs", bugRoutes);
 apiRouter.use("/posts", postRoutes);
+apiRouter.use("/comments", commentRoutes);
 
 app.use(errorHandler);
 

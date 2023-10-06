@@ -7,7 +7,7 @@ const commentSchema = new mongoose.Schema({
   content: { type: String, required: true },
   date: { type: Date, default: Date.now },
   subcomments: [commentSchema],
-  ref: "Comment",
+  ref: Comment,
 });
 
 const Comment = mongoose.model("Comment", commentSchema);
