@@ -1,14 +1,14 @@
-require('dotenv').config();
+require("dotenv").config();
 const express = require("express");
 const morgan = require("morgan");
-const cors = require('cors');
+const cors = require("cors");
 const mongoose = require("mongoose");
 const dataRoutes = require("./routes/dataRoutes");
 const contributorRoutes = require("./routes/contributorRoutes");
 const bugRoutes = require("./routes/bugRoutes");
 const onboardingRoutes = require("./routes/onboardingRoutes");
 const errorHandler = require("./middlewares/errorHandler");
-
+const postRoutes = require("./routes/postRoutes");
 
 const app = express();
 const PORT = process.env.PORT || 5555;
@@ -20,15 +20,15 @@ app.use(express.json());
 app.use("/uploads", express.static("uploads"));
 
 const apiRouter = express.Router();
-app.use('/api', apiRouter);
+app.use("/api", apiRouter);
 
-apiRouter.use('/data', dataRoutes);
-apiRouter.use('/contributors', contributorRoutes);
-apiRouter.use('/onboarding', onboardingRoutes);
-apiRouter.use('/bugs', bugRoutes);
+apiRouter.use("/data", dataRoutes);
+apiRouter.use("/contributors", contributorRoutes);
+apiRouter.use("/onboarding", onboardingRoutes);
+apiRouter.use("/bugs", bugRoutes);
+apiRouter.use("/posts", postRoutes);
 
 app.use(errorHandler);
-
 
 //Establish connection to MongoDB
 mongoose
