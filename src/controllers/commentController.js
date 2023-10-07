@@ -4,7 +4,7 @@ exports.getComments = async (req, res) => {
   const comments = await Comment.find();
 
   res.status(200).json({
-    message: "Comments fetched successfully!",
+    message: "OK",
     data: comments,
   });
 };

@@ -7,9 +7,9 @@ const dataRoutes = require("./routes/dataRoutes");
 const contributorRoutes = require("./routes/contributorRoutes");
 const bugRoutes = require("./routes/bugRoutes");
 const onboardingRoutes = require("./routes/onboardingRoutes");
-const errorHandler = require("./middlewares/errorHandler");
 const postRoutes = require("./routes/postRoutes");
 const commentRoutes = require("./routes/commentRoutes");
+const errorHandler = require("./middlewares/errorHandler");
 
 const app = express();
 const PORT = process.env.PORT || 5555;

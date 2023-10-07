@@ -10,6 +10,4 @@ const commentSchema = new mongoose.Schema({
   ref: Comment,
 });
 
-const Comment = mongoose.model("Comment", commentSchema);
-
-module.exports = Comment;
+module.exports = mongoose.model("Comment", commentSchema);
