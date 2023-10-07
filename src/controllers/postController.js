@@ -55,4 +55,19 @@ exports.updatePosts = async (req, res) => {
   });
 };
 
+exports.addComment = async (req, res) => {
+  if (!req.body.content) {
+    return res
+      .status(400)
+      .json({ error: "Bad Request: " + JSON.stringify(req.body) });
+  }
+
+  const comment = new Comment({
+    author: req.body.author,
+    content: req.body.content,
+    date: req.body.date,
+    sucomments: req.body.subcomments,
+  });
+};
+
 exports.deletePost = async (req, res) => {};
