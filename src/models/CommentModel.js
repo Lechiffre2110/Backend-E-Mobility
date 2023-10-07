@@ -6,8 +6,8 @@ const commentSchema = new mongoose.Schema({
   author: { type: String, required: true },
   content: { type: String, required: true },
   date: { type: Date, default: Date.now },
-  subcomments: [commentSchema],
-  ref: Comment,
+  //subcomments: [commentSchema],
+  //ref: Comment,
 });
 
 module.exports = mongoose.model("Comment", commentSchema);
