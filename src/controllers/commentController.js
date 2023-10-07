@@ -1,7 +1,7 @@
 const Comment = require("../models/CommentModel");
 
 exports.getComments = async (req, res) => {
-  const comments = await Comment.find();
+  const comments = await Comment.find(); //Nicht mehr möglich wegen CommentModel export
 
   res.status(200).json({
     message: "OK",

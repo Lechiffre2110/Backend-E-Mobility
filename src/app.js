@@ -28,7 +28,7 @@ apiRouter.use("/contributors", contributorRoutes);
 apiRouter.use("/onboarding", onboardingRoutes);
 apiRouter.use("/bugs", bugRoutes);
 apiRouter.use("/posts", postRoutes);
-apiRouter.use("/comments", commentRoutes);
+apiRouter.use("/comments", commentRoutes); //Nicht möglich wegen Syntax error durch Model Export
 
 app.use(errorHandler);
 
