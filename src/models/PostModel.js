@@ -5,7 +5,7 @@ const postSchema = new mongoose.Schema({
   id: Number,
   title: String,
   content: String,
-  createdDate: { type: Date, default: Date.now },
+  date: { type: Date, default: Date.now },
   category: String,
   comments: [commentSchema],
 });

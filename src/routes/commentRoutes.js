@@ -1,4 +1,4 @@
-const express = require("express");
+/*const express = require("express");
 const router = express.Router();
 const multer = require("multer");
 const upload = multer();
@@ -8,4 +8,4 @@ router.get("/", commentController.getComments);
 router.put("/", upload.none(), commentController.updateComments);
 router.delete("/", commentController.deleteComment);
 
-module.exports = router;
+module.exports = router;*/

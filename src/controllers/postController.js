@@ -55,7 +55,9 @@ exports.updatePosts = async (req, res) => {
   });
 };
 
-exports.addComment = async (req, res) => {
+exports.updateComment = async (req, res) => {
+  const post = await Post.findById(req.params._id);
+
   if (!req.body.content) {
     return res
       .status(400)
@@ -68,6 +70,18 @@ exports.addComment = async (req, res) => {
     date: req.body.date,
     sucomments: req.body.subcomments,
   });
+
+  comment
+    .save()
+    .then(() => Post.findById(req.params._id))
+    .then((post) => {
+      post.comments.unshift(comment);
+      return post.save();
+    })
+    .then(() => res.redirect("/"))
+    .catch((err) => {
+      console.log(err);
+    });
 };
 
 exports.deletePost = async (req, res) => {};

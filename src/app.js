@@ -8,7 +8,7 @@ const contributorRoutes = require("./routes/contributorRoutes");
 const bugRoutes = require("./routes/bugRoutes");
 const onboardingRoutes = require("./routes/onboardingRoutes");
 const postRoutes = require("./routes/postRoutes");
-const commentRoutes = require("./routes/commentRoutes");
+//const commentRoutes = require("./routes/commentRoutes");
 const errorHandler = require("./middlewares/errorHandler");
 
 const app = express();
@@ -28,7 +28,7 @@ apiRouter.use("/contributors", contributorRoutes);
 apiRouter.use("/onboarding", onboardingRoutes);
 apiRouter.use("/bugs", bugRoutes);
 apiRouter.use("/posts", postRoutes);
-apiRouter.use("/comments", commentRoutes); //Nicht möglich wegen Syntax error durch Model Export
+//apiRouter.use("/comments", commentRoutes); //Nicht möglich wegen Syntax error durch Model Export
 
 app.use(errorHandler);
 
