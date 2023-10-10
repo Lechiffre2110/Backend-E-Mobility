@@ -135,3 +135,34 @@ exports.sendBugReportWebhook = (bugname, description, contact) => {
       content: "<@&1146438551655944296>",
     });
   };
+
+  exports.sendMeetingWebhook = (title, date, time) => {
+    // Webhook setup
+    const webhookClient = new WebhookClient({
+      url: process.env.DISCORD_MEETING_WEBHOOK_URL,
+    });
+  
+    const embed = new EmbedBuilder()
+      .setColor(0x0099ff)
+      .setTitle("📅 Neues Meeting 📅")
+      .setURL("https://e-mobility.vercel.app/datahub")
+      .setAuthor({
+        name: "E-Mobility",
+        iconURL: "https://i.imgur.com/gCHlpoX.jpg",
+        url: "https://e-mobility.vercel.app/datahub",
+      })
+      .setDescription(`Ein neues Meeting wurde geplant!`)
+      .addFields(
+        { name: "📝  Titel", value: title },
+        { name: "📅  Datum", value: date },
+        { name: "🕒  Uhrzeit", value: time }
+      )
+      .setTimestamp()
+  
+    webhookClient.send({
+      username: "E-Mobility Dashboard",
+      avatarURL: "https://i.imgur.com/gCHlpoX.jpg",
+      embeds: [embed],
+      content: "@everyone",
+    });
+  };

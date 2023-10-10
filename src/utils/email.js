@@ -18,5 +18,40 @@ exports.sendOnboardingEmail = async (email, name) => {
     html: emailTemplate.onboardingTemplate(name),
   });
 
-  console.log(info.messageId);
 };
+
+exports.sendBookingEmail = async (text) => {
+  var transporter = nodemailer.createTransport({
+    service: "gmail",
+    auth: {
+        user: process.env.EMAIL,
+        pass: process.env.EMAIL_PASSWORD,
+    },
+  });
+
+  let info = await transporter.sendMail({
+    from: `"Projekt E-Mobility" <***-${process.env.EMAIL}>`,
+    to: [process.env.EMAIL_HALLE_HAUFFE, process.env.EMAIL_HALLE_STURM],
+    subject: "Projekt E-Mobility - Booking Request",
+    text: text
+  });
+}
+
+exports.sendUploadInvite = async (email, name, link) => {
+  var transporter = nodemailer.createTransport({
+    service: "gmail",
+    auth: {
+        user: process.env.EMAIL,
+        pass: process.env.EMAIL_PASSWORD,
+    },
+  });
+
+  let info = await transporter.sendMail({
+    from: `"Projekt E-Mobility" <***-${process.env.EMAIL}>`,
+    to: email,
+    subject: "Projekt E-Mobility - Upload",
+    text: `Sehr geehrte/r ${name},\n\nbitte nutzen Sie diesen Link um die gesammelten Dateien hochzuladen: ${link}\n\nMit freundlichen Grüßen,\n\nProjekt E-Mobility`
+  });
+}
+
+

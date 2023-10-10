@@ -7,6 +7,7 @@ const dataRoutes = require("./routes/dataRoutes");
 const contributorRoutes = require("./routes/contributorRoutes");
 const bugRoutes = require("./routes/bugRoutes");
 const onboardingRoutes = require("./routes/onboardingRoutes");
+const quickActionRoutes = require("./routes/quickActionRoutes");
 const errorHandler = require("./middlewares/errorHandler");
 
 
@@ -26,6 +27,7 @@ apiRouter.use('/data', dataRoutes);
 apiRouter.use('/contributors', contributorRoutes);
 apiRouter.use('/onboarding', onboardingRoutes);
 apiRouter.use('/bugs', bugRoutes);
+apiRouter.use('/quickactions', quickActionRoutes);
 
 app.use(errorHandler);
 
