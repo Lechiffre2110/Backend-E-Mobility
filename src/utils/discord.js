@@ -1,11 +1,18 @@
 const { EmbedBuilder, WebhookClient } = require("discord.js");
 
+/**
+ * Function to send a notification to Discord about a new contributor request
+ * @param {String} name the name of the contributor  
+ * @param {String} role the role of the contributor (student, professor, ...) 
+ * @param {String} description the description of the contributors work
+ */
 exports.sendContributorWebhook = (name, role, description) => {
   // Webhook setup
   const webhookClient = new WebhookClient({
     url: process.env.DISCORD_WEBHOOK_URL,
   });
 
+  // Create embed 
   const embed = new EmbedBuilder()
     .setColor(0x0099ff)
     .setTitle("🌟 New Contributor Request 🌟")
@@ -27,6 +34,7 @@ exports.sendContributorWebhook = (name, role, description) => {
       iconURL: "https://i.imgur.com/gCHlpoX.jpg",
     });
 
+  // Send embed to Discord
   webhookClient.send({
     username: "E-Mobility Dashboard",
     avatarURL: "https://i.imgur.com/gCHlpoX.jpg",
@@ -35,12 +43,17 @@ exports.sendContributorWebhook = (name, role, description) => {
   });
 };
 
+/**
+ * Function to send a notification to Discord about a new onboarding request
+ * @param {String} name the name of the user requesting onboarding
+ */
 exports.sendOnboardingRequestWebhook = (name) => {
   // Webhook setup
   const webhookClient = new WebhookClient({
     url: process.env.DISCORD_WEBHOOK_URL,
   });
 
+  // Create embed
   const embed = new EmbedBuilder()
     .setColor(0x0099ff)
     .setTitle("📋 New Onboarding Request 📋")
@@ -58,6 +71,7 @@ exports.sendOnboardingRequestWebhook = (name) => {
       iconURL: "https://i.imgur.com/gCHlpoX.jpg",
     });
 
+  // Send embed to Discord
   webhookClient.send({
     username: "E-Mobility Dashboard",
     avatarURL: "https://i.imgur.com/gCHlpoX.jpg",
@@ -66,12 +80,19 @@ exports.sendOnboardingRequestWebhook = (name) => {
   });
 };
 
+/**
+ * Function to send a notification to Discord about a new file upload
+ * @param {String} name the name of the user uploading the file
+ * @param {String} filename the name of the file
+ * @param {String} description the description of the file
+ */
 exports.sendUploadWebhook = (name, filename, description) => {
   // Webhook setup
   const webhookClient = new WebhookClient({
     url: process.env.DISCORD_WEBHOOK_URL,
   });
 
+  // Create embed
   const embed = new EmbedBuilder()
     .setColor(0x0099ff)
     .setTitle("🚀 New File Upload 🚀")
@@ -93,6 +114,7 @@ exports.sendUploadWebhook = (name, filename, description) => {
       iconURL: "https://i.imgur.com/gCHlpoX.jpg",
     });
 
+  // Send embed to Discord
   webhookClient.send({
     username: "E-Mobility Dashboard",
     avatarURL: "https://i.imgur.com/gCHlpoX.jpg",
@@ -101,12 +123,19 @@ exports.sendUploadWebhook = (name, filename, description) => {
   });
 };
 
+/**
+ * Function to send a notification to Discord about a new bug report
+ * @param {String} bugname the name of the bug
+ * @param {String} description the description of the bug
+ * @param {String} contact the contact information of the reporter
+ */
 exports.sendBugReportWebhook = (bugname, description, contact) => {
     // Webhook setup
     const webhookClient = new WebhookClient({
       url: process.env.DISCORD_WEBHOOK_URL,
     });
   
+    // Create embed
     const embed = new EmbedBuilder()
       .setColor(0x0099ff)
       .setTitle("⚠️ A new bug report has been submitted ⚠️")
@@ -128,6 +157,7 @@ exports.sendBugReportWebhook = (bugname, description, contact) => {
         iconURL: "https://i.imgur.com/gCHlpoX.jpg",
       });
   
+    // Send embed to Discord
     webhookClient.send({
       username: "E-Mobility Dashboard",
       avatarURL: "https://i.imgur.com/gCHlpoX.jpg",
@@ -136,12 +166,19 @@ exports.sendBugReportWebhook = (bugname, description, contact) => {
     });
   };
 
+  /**
+   * Function to send a notification to Discord about a new meeting
+   * @param {String} title the title of the meeting
+   * @param {String} date the date of the meeting
+   * @param {String} time the time of the meeting
+   */
   exports.sendMeetingWebhook = (title, date, time) => {
     // Webhook setup
     const webhookClient = new WebhookClient({
       url: process.env.DISCORD_MEETING_WEBHOOK_URL,
     });
   
+    // Create embed
     const embed = new EmbedBuilder()
       .setColor(0x0099ff)
       .setTitle("📅 Neues Meeting 📅")
@@ -159,6 +196,7 @@ exports.sendBugReportWebhook = (bugname, description, contact) => {
       )
       .setTimestamp()
   
+    // Send embed to Discord
     webhookClient.send({
       username: "E-Mobility Dashboard",
       avatarURL: "https://i.imgur.com/gCHlpoX.jpg",

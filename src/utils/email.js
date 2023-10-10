@@ -2,6 +2,11 @@ const e = require("express");
 var nodemailer = require("nodemailer");
 var emailTemplate = require("./emailTemplate");
 
+/**
+ * Function to send an email to send an onboarding email to an approved user
+ * @param {String} email email of the user 
+ * @param {String} name name of the user 
+ */
 exports.sendOnboardingEmail = async (email, name) => {
   var transporter = nodemailer.createTransport({
     service: "gmail",
@@ -20,6 +25,10 @@ exports.sendOnboardingEmail = async (email, name) => {
 
 };
 
+/**
+ * Function to send an email to send a booking email to the garage team
+ * @param {String} text the text of the email 
+ */
 exports.sendBookingEmail = async (text) => {
   var transporter = nodemailer.createTransport({
     service: "gmail",

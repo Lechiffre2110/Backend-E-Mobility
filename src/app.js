@@ -11,15 +11,20 @@ const quickActionRoutes = require("./routes/quickActionRoutes");
 const errorHandler = require("./middlewares/errorHandler");
 
 
+//Initialize express app
 const app = express();
+
+//Set up environment variables
 const PORT = process.env.PORT || 5555;
 const MONGO_URI = process.env.MONGO_URI;
 
-app.use(cors());
-app.use(morgan("combined"));
-app.use(express.json());
-app.use("/uploads", express.static("uploads"));
+//Set up middlewares
+app.use(cors()); //Enable CORS
+app.use(morgan("combined")); 
+app.use(express.json()); //Parse JSON
+app.use("/uploads", express.static("uploads")); //Specify uploads folder as static folder
 
+//Set up routes
 const apiRouter = express.Router();
 app.use('/api', apiRouter);
 
@@ -29,6 +34,7 @@ apiRouter.use('/onboarding', onboardingRoutes);
 apiRouter.use('/bugs', bugRoutes);
 apiRouter.use('/quickactions', quickActionRoutes);
 
+//Set up error handler
 app.use(errorHandler);
 
 

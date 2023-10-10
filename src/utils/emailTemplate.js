@@ -1,3 +1,7 @@
+/**
+ * Template for the onboarding email
+ * @param {String} name name of the other that is being onboarded
+ */
 exports.onboardingTemplate = (name) => {
   return `
   <div
