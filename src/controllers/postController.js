@@ -1,6 +1,12 @@
 const Post = require("../models/PostModel");
 const Comment = require("../models/CommentModel");
 
+/**
+ * POST function for adding a post to the database; Currently not in use!
+ * @param {*} req HTTP request object
+ * @param {*} res HTTP resonse object
+ * @returns
+ */
 exports.addPost = async (req, res) => {
   if (!req.body.title || !req.body.content) {
     return res
@@ -24,6 +30,11 @@ exports.addPost = async (req, res) => {
   });
 };
 
+/**
+ * GET Function to
+ * @param {*} req HTTP request object
+ * @param {*} res HTTP response object
+ */
 exports.getAllPosts = async (req, res) => {
   const post = await Post.find();
 
@@ -33,6 +44,12 @@ exports.getAllPosts = async (req, res) => {
   });
 };
 
+/**
+ * PUT request to update a post and in our case also Post it to the database
+ * @param {*} req HTTP request object
+ * @param {*} res HTTP response object
+ * @returns
+ */
 exports.updatePosts = async (req, res) => {
   if (!req.body.title || !req.body.content) {
     return res
@@ -56,6 +73,12 @@ exports.updatePosts = async (req, res) => {
   });
 };
 
+/**
+ * PUT request to update a comment and in our case also Post it to the database
+ * @param {*} req HTTP request object
+ * @param {*} res HTTP response object
+ * @returns
+ */
 exports.updateComment = async (req, res) => {
   try {
     const postId = req.params.id;
@@ -86,8 +109,14 @@ exports.updateComment = async (req, res) => {
   }
 };
 
+/**
+ * PUT Request to update a subcomment and in our case also Post it to the subcomments array in CommentModel and post it into the database.
+ * Currently not available due to CommentModel not being a mongoose.model export.
+ * @param {*} req HTTP request object
+ * @param {*} res HTTP response object
+ * @returns
+ */
 exports.updateSubComment = async (req, res) => {
-  //Subcomment grade nicht möglich, da CommentModel nicht als mongoose.model exportiert wird
   try {
     const commentId = req.params.commentId;
     const subcommentData = {
@@ -117,33 +146,10 @@ exports.updateSubComment = async (req, res) => {
   }
 };
 
-/*exports.updateComment = async (req, res) => {
-  const post = await Post.findById(req.params._id);
-
-  if (!req.body.content) {
-    return res
-      .status(400)
-      .json({ error: "Bad Request: " + JSON.stringify(req.body) });
-  }
-
-  const comment = new Comment({
-    author: req.body.author,
-    content: req.body.content,
-    date: req.body.date,
-    sucomments: req.body.subcomments,
-  });
-
-  comment
-    .save()
-    .then(() => Post.findById(req.params.id))
-    .then((post) => {
-      post.comments.unshift(comment);
-      return post.save();
-    })
-    .then(() => res.redirect("/"))
-    .catch((err) => {
-      console.log(err);
-    });
-};*/
-
+/**
+ * TODO: Implement this function
+ * Deletes a Post from the Database.
+ * @param {*} req HTTP request object
+ * @param {*} res HTTP response object
+ */
 exports.deletePost = async (req, res) => {};

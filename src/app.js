@@ -8,14 +8,12 @@ const contributorRoutes = require("./routes/contributorRoutes");
 const bugRoutes = require("./routes/bugRoutes");
 const onboardingRoutes = require("./routes/onboardingRoutes");
 const postRoutes = require("./routes/postRoutes");
-//const commentRoutes = require("./routes/commentRoutes");
 const errorHandler = require("./middlewares/errorHandler");
 
 const quickActionRoutes = require("./routes/quickActionRoutes");
 const errorHandler = require("./middlewares/errorHandler");
 
 //Initialize express app
-
 const app = express();
 
 //Set up environment variables
@@ -24,7 +22,7 @@ const MONGO_URI = process.env.MONGO_URI;
 
 //Set up middlewares
 app.use(cors()); //Enable CORS
-app.use(morgan("combined")); 
+app.use(morgan("combined"));
 app.use(express.json()); //Parse JSON
 app.use("/uploads", express.static("uploads")); //Specify uploads folder as static folder
 
@@ -37,14 +35,12 @@ apiRouter.use("/contributors", contributorRoutes);
 apiRouter.use("/onboarding", onboardingRoutes);
 apiRouter.use("/bugs", bugRoutes);
 apiRouter.use("/posts", postRoutes);
-//apiRouter.use("/comments", commentRoutes); //Nicht möglich wegen Syntax error durch Model Export
 
-apiRouter.use('/data', dataRoutes);
-apiRouter.use('/contributors', contributorRoutes);
-apiRouter.use('/onboarding', onboardingRoutes);
-apiRouter.use('/bugs', bugRoutes);
-apiRouter.use('/quickactions', quickActionRoutes);
-
+apiRouter.use("/data", dataRoutes);
+apiRouter.use("/contributors", contributorRoutes);
+apiRouter.use("/onboarding", onboardingRoutes);
+apiRouter.use("/bugs", bugRoutes);
+apiRouter.use("/quickactions", quickActionRoutes);
 
 //Set up error handler
 app.use(errorHandler);
