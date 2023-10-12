@@ -9,9 +9,7 @@ const bugRoutes = require("./routes/bugRoutes");
 const onboardingRoutes = require("./routes/onboardingRoutes");
 const postRoutes = require("./routes/postRoutes");
 const errorHandler = require("./middlewares/errorHandler");
-
 const quickActionRoutes = require("./routes/quickActionRoutes");
-const errorHandler = require("./middlewares/errorHandler");
 
 //Initialize express app
 const app = express();
@@ -30,20 +28,14 @@ app.use("/uploads", express.static("uploads")); //Specify uploads folder as stat
 const apiRouter = express.Router();
 app.use("/api", apiRouter);
 
-apiRouter.use("/data", dataRoutes);
-apiRouter.use("/contributors", contributorRoutes);
-apiRouter.use("/onboarding", onboardingRoutes);
-apiRouter.use("/bugs", bugRoutes);
-apiRouter.use("/posts", postRoutes);
 
 apiRouter.use("/data", dataRoutes);
 apiRouter.use("/contributors", contributorRoutes);
 apiRouter.use("/onboarding", onboardingRoutes);
 apiRouter.use("/bugs", bugRoutes);
 apiRouter.use("/quickactions", quickActionRoutes);
+apiRouter.use("/posts", postRoutes);
 
-//Set up error handler
-app.use(errorHandler);
 
 //Establish connection to MongoDB
 mongoose

@@ -44,7 +44,7 @@ exports.onboardingTemplate = (name) => {
         </p>
 
         <a
-          href="https://www.youtube.com/watch?v=2LUdnb-mls0"
+          href="https://circuitstate.com/tutorials/what-is-can-bus-how-to-use-can-interface-with-esp32-and-arduino/"
           style="font-family: Arial, sans-serif; color: white; cursor: pointer;"
           >CAN Intro</a
         >
@@ -59,7 +59,7 @@ exports.onboardingTemplate = (name) => {
         </p>
         <div>
           <a
-            href="https://www.youtube.com/watch?v=2LUdnb-mls0"
+            href="https://www.youtube.com/watch?v=eZ74x6dVYes"
             style="
               font-family: Arial, sans-serif;
               color: white;
@@ -70,7 +70,7 @@ exports.onboardingTemplate = (name) => {
         </div>
         <div style="margin-top: 20px;">
           <a
-            href="https://www.youtube.com/watch?v=2LUdnb-mls0"
+            href="https://www.youtube.com/watch?v=EKPobkb1N6o"
             style="
               font-family: Arial, sans-serif;
               color: white;
@@ -89,9 +89,9 @@ exports.onboardingTemplate = (name) => {
           Allgemeine Grundlage für das Projekt
         </p>
         <a
-          href="https://www.youtube.com/watch?v=2LUdnb-mls0"
+          href="https://discord.com/channels/1146071831753789490/1146072161522553003/1152884482500739133"
           style="font-family: Arial, sans-serif; color: white; cursor: pointer;"
-          >Bachelorarbeit</a
+          >Bachelorarbeit (im Discord Server)</a
         >
       </div>
       <p
@@ -160,7 +160,7 @@ exports.onboardingTemplate = (name) => {
           border-radius: 5px;
         "
       >
-      <a style="color: white;" href="https://discord.gg/Br9Rv5Hb3d">
+      <a style="color: white;" href="https://discord.gg/ZVVHR3eWpG">
         Discord Server
         </a>
       </button>
